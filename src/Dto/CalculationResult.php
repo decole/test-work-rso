@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
-use App\Model\Currency;
+use App\Enum\CurrencyEnum;
 
 final readonly class CalculationResult
 {
@@ -15,7 +15,7 @@ final readonly class CalculationResult
         public float $dailyRate,
         public float $currencyRate,
         public int $insuredAmount,
-        public Currency $currency,
+        public CurrencyEnum $currency,
     ) {
     }
 }
