@@ -1,0 +1,8 @@
+# Keep the build context small — only Dockerfile + php.ini are COPY'ed.
+.git
+.idea
+vendor
+var
+.env
+.env.local
+*.md
