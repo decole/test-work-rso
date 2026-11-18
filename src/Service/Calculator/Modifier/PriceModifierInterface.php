@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Service\Calculator\Modifier;
+
+use App\Dto\CalculationContext;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag('app.insurance.price_modifier')]
+interface PriceModifierInterface
+{
+    /**
+     * Модифицировать стоимость в валюте с учетом контекста расчета.
+     *
+     * @param numeric-string $currentPriceInCurrency
+     * @return numeric-string
+     */
+    public function modify(string $currentPriceInCurrency, CalculationContext $context): string;
+}
+
