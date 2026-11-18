@@ -20,7 +20,7 @@ log:
 
 # Quality Assurance & Testing
 test:
-	docker compose exec app composer test
+	docker compose exec app bin/phpunit
 
 app-audit:
 	docker compose exec app composer audit --abandoned=ignore || true
