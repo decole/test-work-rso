@@ -4,11 +4,14 @@
 # Files in the packages/ subdirectory configure your dependencies.
 # See also https://symfony.com/doc/current/service_container/import.html
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.timezone: '%env(default:app.default_timezone:APP_TIMEZONE)%'
     app.default_timezone: 'Europe/Moscow'
+
+# You can redefine the coefficients and sums here.
+#    app.insurance.daily_coefficients:
+#        30000: 0.6
+#        50000: 0.8
 
 services:
     _defaults:
@@ -17,3 +20,8 @@ services:
 
     App\:
         resource: '../src/'
+
+# To redefine coefficients and sums, specify the parameter to be redefined here.
+#    App\Service\Calculator\Coefficient\ConfigurableDailyCoefficientResolver:
+#        arguments:
+#            $coefficients: '%app.insurance.daily_coefficients%'
