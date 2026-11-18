@@ -22,25 +22,18 @@ log:
 test:
 	docker compose exec app bin/phpunit
 
-app-audit:
-	docker compose exec app composer audit --abandoned=ignore || true
-
-backend-audit: app-audit
-
 phpstan:
 	docker compose exec app composer phpstan
 
-psalm:
-	docker compose exec app composer psalm
-
-deptrac:
-	docker compose exec app composer deptrac
-
-fix-cs:
+cs-fix:
 	docker compose exec app composer fix-cs
 
-check-cs:
+cs-check:
 	docker compose exec app composer check-cs
+
+fix-cs: cs-fix
+
+check-cs: cs-check
 
 lint:
 	docker compose exec app composer lint
