@@ -14,8 +14,7 @@ final readonly class CbrXmlCurrencyRateProvider implements CurrencyRateProviderI
     public function __construct(
         #[Autowire(service: 'cbr.client')]
         private HttpClientInterface $httpClient,
-    ) {
-    }
+    ) {}
 
     public function getRate(CurrencyEnum $currency, \DateTimeImmutable $date): float
     {
@@ -85,4 +84,3 @@ final readonly class CbrXmlCurrencyRateProvider implements CurrencyRateProviderI
         throw CurrencyRateUnavailableException::forCurrency($currency->value);
     }
 }
-

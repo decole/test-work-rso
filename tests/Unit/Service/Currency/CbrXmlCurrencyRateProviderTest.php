@@ -59,7 +59,7 @@ XML;
             ->with(
                 'GET',
                 'scripts/XML_daily.asp',
-                self::callback(fn (array $options): bool => isset($options['query']['date_req']))
+                self::callback(static fn(array $options): bool => isset($options['query']['date_req'])),
             )
             ->willReturn($mockResponse);
 

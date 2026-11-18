@@ -25,8 +25,7 @@ final readonly class ExceptionListener
         #[Autowire('%kernel.environment%')]
         private string $environment,
         private ?LoggerInterface $logger = null,
-    ) {
-    }
+    ) {}
 
     public function __invoke(ExceptionEvent $event): void
     {
@@ -54,7 +53,7 @@ final readonly class ExceptionListener
             }
 
             $response = (new JsonResponse())
-                ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                ->setEncodingOptions(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES)
                 ->setData([
                     'type' => 'ERROR',
                     'data' => $errorList,
@@ -74,15 +73,15 @@ final readonly class ExceptionListener
                 $errorList[] = [
                     'type' => 'validation',
                     'property' => $this->toSnakeCase((string) $error->getPath()),
-                    'message' => sprintf(
+                    'message' => \sprintf(
                         'Некорректный тип данных. Ожидалось: %s.',
-                        implode(', ', $error->getExpectedTypes() ?? ['валидное значение'])
+                        implode(', ', $error->getExpectedTypes() ?? ['валидное значение']),
                     ),
                 ];
             }
 
             $response = (new JsonResponse())
-                ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                ->setEncodingOptions(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES)
                 ->setData([
                     'type' => 'ERROR',
                     'data' => $errorList,
@@ -135,7 +134,7 @@ final readonly class ExceptionListener
         }
 
         $response = (new JsonResponse())
-            ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            ->setEncodingOptions(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES)
             ->setData([
                 'type' => 'ERROR',
                 'data' => $data,
@@ -170,4 +169,3 @@ final readonly class ExceptionListener
         return strtolower((string) preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
     }
 }
-

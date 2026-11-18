@@ -25,14 +25,14 @@ final readonly class CachedCurrencyRateProvider implements CurrencyRateProviderI
         private CurrencyRateProviderInterface $inner,
         private CacheInterface $cache,
         private ?LoggerInterface $logger = null,
-    ) {
-    }
+    ) {}
 
     public function getRate(CurrencyEnum $currency, \DateTimeImmutable $date): float
     {
+        /** @var bool $isServiceInCooldown */
         $isServiceInCooldown = $this->cache->get(
             key: self::CIRCUIT_BREAKER_CACHE_KEY,
-            callback: static fn(): bool => false
+            callback: static fn(): bool => false,
         );
 
         if (true === $isServiceInCooldown) {
@@ -43,12 +43,12 @@ final readonly class CachedCurrencyRateProvider implements CurrencyRateProviderI
 
         try {
             return (float) $this->cache->get(
-                key: sprintf(self::TEMPLATE_RATE_CACHE_KEY, $currency->value, $date->format('Y-m-d')),
+                key: \sprintf(self::TEMPLATE_RATE_CACHE_KEY, $currency->value, $date->format('Y-m-d')),
                 callback: function (ItemInterface $item) use ($currency, $date): float {
                     $item->expiresAfter(self::CACHE_TTL_SECONDS);
 
                     return $this->inner->getRate($currency, $date);
-                }
+                },
             );
         } catch (CurrencyRateUnavailableException $e) {
             $this->activateCircuitBreaker();
@@ -72,7 +72,7 @@ final readonly class CachedCurrencyRateProvider implements CurrencyRateProviderI
                     $item->expiresAfter(self::CIRCUIT_BREAKER_TTL_SECONDS);
 
                     return true;
-                }
+                },
             );
         } catch (\Throwable) {
             // Ignore cache failure during circuit breaker activation

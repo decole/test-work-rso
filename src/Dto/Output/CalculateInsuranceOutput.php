@@ -15,8 +15,7 @@ final readonly class CalculateInsuranceOutput
         public float $dailyRate,
         public float $currencyRate,
         public int $insuredAmount,
-    ) {
-    }
+    ) {}
 
     public static function fromResult(CalculationResult $result): self
     {
@@ -30,4 +29,3 @@ final readonly class CalculateInsuranceOutput
         );
     }
 }
-

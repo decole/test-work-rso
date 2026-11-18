@@ -11,11 +11,10 @@ final class UnsupportedInsuredAmountException extends DomainException
      */
     public static function forAmount(int $amount, array $supportedAmounts): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Страховая сумма %d не поддерживается. Допустимые суммы: %s.',
             $amount,
-            implode(', ', $supportedAmounts)
+            implode(', ', $supportedAmounts),
         ));
     }
 }
-

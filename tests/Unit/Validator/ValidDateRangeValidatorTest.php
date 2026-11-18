@@ -26,7 +26,10 @@ final class ValidDateRangeValidatorTest extends TestCase
                 }
 
                 $class = $constraint->validatedBy();
-                return new $class();
+                /** @var ConstraintValidatorInterface $validator */
+                $validator = new $class();
+
+                return $validator;
             }
         };
 
@@ -56,7 +59,9 @@ final class ValidDateRangeValidatorTest extends TestCase
         $violations = $validator->validate($invalidInput, new ValidDateRange());
 
         self::assertCount(1, $violations);
-        self::assertSame('endDate', $violations[0]->getPropertyPath());
-        self::assertSame('Дата начала поездки не может быть позже даты окончания.', $violations[0]->getMessage());
+        $violation = $violations[0] ?? null;
+        self::assertNotNull($violation);
+        self::assertSame('endDate', $violation->getPropertyPath());
+        self::assertSame('Дата начала поездки не может быть позже даты окончания.', $violation->getMessage());
     }
 }

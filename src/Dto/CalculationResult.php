@@ -16,7 +16,5 @@ final readonly class CalculationResult
         public float $currencyRate,
         public int $insuredAmount,
         public CurrencyEnum $currency,
-    ) {
-    }
+    ) {}
 }
-

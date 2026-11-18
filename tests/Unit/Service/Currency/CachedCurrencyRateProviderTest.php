@@ -63,4 +63,3 @@ final class CachedCurrencyRateProviderTest extends TestCase
         $cachedProvider->getRate(CurrencyEnum::EUR, $date);
     }
 }
-

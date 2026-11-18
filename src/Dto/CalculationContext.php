@@ -12,7 +12,5 @@ final readonly class CalculationContext
         public int $insuredAmount,
         public TripPeriod $period,
         public CurrencyEnum $currency,
-    ) {
-    }
+    ) {}
 }
-

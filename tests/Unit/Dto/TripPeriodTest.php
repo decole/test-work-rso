@@ -50,4 +50,3 @@ final class TripPeriodTest extends TestCase
         TripPeriod::fromStrings('invalid-date', '2025-10-03');
     }
 }
-

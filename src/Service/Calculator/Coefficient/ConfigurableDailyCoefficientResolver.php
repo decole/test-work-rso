@@ -16,8 +16,7 @@ final readonly class ConfigurableDailyCoefficientResolver implements DailyCoeffi
             30000 => 0.6,
             50000 => 0.8,
         ],
-    ) {
-    }
+    ) {}
 
     public function resolve(int $insuredAmount): float
     {
@@ -35,4 +34,3 @@ final readonly class ConfigurableDailyCoefficientResolver implements DailyCoeffi
         return array_keys($this->coefficients);
     }
 }
-

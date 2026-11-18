@@ -19,24 +19,20 @@ final readonly class CalculateInsuranceInput
         #[Assert\Type(type: 'integer', message: 'Страховая сумма должна быть целым числом.')]
         #[SupportedInsuredAmount]
         public int $insuredAmount,
-
         #[Assert\NotBlank(message: 'Дата начала поездки обязательна.')]
         #[Assert\Date(message: 'Некорректный формат даты начала поездки (ожидается YYYY-mm-dd).')]
         public string $startDate,
-
         #[Assert\NotBlank(message: 'Дата окончания поездки обязательна.')]
         #[Assert\Date(message: 'Некорректный формат даты окончания поездки (ожидается YYYY-mm-dd).')]
         public string $endDate,
-
         #[Assert\NotBlank(message: 'Код валюты обязателен.')]
         #[Assert\Length(exactly: 3, exactMessage: 'Код валюты должен состоять ровно из 3 символов.')]
         #[Assert\Choice(
             callback: [CurrencyEnum::class, 'values'],
-            message: 'Недопустимая валюта. Доступны: {{ choices }}.'
+            message: 'Недопустимая валюта. Доступны: {{ choices }}.',
         )]
         public string $currency,
-    ) {
-    }
+    ) {}
 
     public function toContext(): CalculationContext
     {
@@ -46,4 +42,3 @@ final readonly class CalculateInsuranceInput
         return new CalculationContext($this->insuredAmount, $period, $currencyEnum);
     }
 }
-

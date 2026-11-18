@@ -21,8 +21,7 @@ final readonly class InsuranceCalculator implements InsuranceCalculatorInterface
         private CurrencyRateProviderInterface $rateProvider,
         #[AutowireIterator('app.insurance.price_modifier')]
         private iterable $modifiers = [],
-    ) {
-    }
+    ) {}
 
     public function calculate(CalculationContext $context): CalculationResult
     {
@@ -31,7 +30,7 @@ final readonly class InsuranceCalculator implements InsuranceCalculatorInterface
 
         // Base calculation: (Daily coefficient) * (number of days)
         // Using bcmath to ensure precision during intermediate calculations
-        $baseCostInCurrency = bcmul((string) $dailyRate, (string) $daysCount, 4);
+        $baseCostInCurrency = bcmul(\sprintf('%.4f', $dailyRate), (string) $daysCount, 4);
 
         // Formula extensibility: apply price modifiers chain if registered
         $finalCostInCurrency = $baseCostInCurrency;
@@ -46,7 +45,7 @@ final readonly class InsuranceCalculator implements InsuranceCalculatorInterface
         $currencyRate = $this->rateProvider->getRate($context->currency, $today);
 
         // Calculate cost in rubles: (cost in currency) * exchange rate
-        $costInRub = bcmul($finalCostInCurrency, (string) $currencyRate, 4);
+        $costInRub = bcmul($finalCostInCurrency, \sprintf('%.4f', $currencyRate), 4);
 
         // Round money amounts to 2 decimal places and currency rate to 4 places per specification
         return new CalculationResult(
@@ -60,4 +59,3 @@ final readonly class InsuranceCalculator implements InsuranceCalculatorInterface
         );
     }
 }
-

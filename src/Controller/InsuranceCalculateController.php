@@ -17,7 +17,8 @@ final class InsuranceCalculateController extends AbstractController
 {
     #[Route('/api/v1/insurance/calculate', name: 'api_insurance_calculate', methods: ['POST'])]
     public function __invoke(
-        #[MapRequestPayload] CalculateInsuranceInput $input,
+        #[MapRequestPayload]
+        CalculateInsuranceInput $input,
         InsuranceCalculatorInterface $calculator,
     ): JsonResponse {
         $result = $calculator->calculate($input->toContext());
@@ -25,4 +26,3 @@ final class InsuranceCalculateController extends AbstractController
         return $this->json(CalculateInsuranceOutput::fromResult($result), Response::HTTP_OK);
     }
 }
-

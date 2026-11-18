@@ -14,8 +14,8 @@ interface PriceModifierInterface
      * Modify the price in currency based on calculation context.
      *
      * @param numeric-string $currentPriceInCurrency
+     *
      * @return numeric-string
      */
     public function modify(string $currentPriceInCurrency, CalculationContext $context): string;
 }
-

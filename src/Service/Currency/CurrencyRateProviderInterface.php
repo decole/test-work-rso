@@ -16,4 +16,3 @@ interface CurrencyRateProviderInterface
      */
     public function getRate(CurrencyEnum $currency, \DateTimeImmutable $date): float;
 }
-

@@ -13,8 +13,7 @@ final class SupportedInsuredAmountValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly DailyCoefficientResolverInterface $coefficientResolver,
-    ) {
-    }
+    ) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
@@ -26,7 +25,7 @@ final class SupportedInsuredAmountValidator extends ConstraintValidator
             return;
         }
 
-        if (!is_int($value) && !ctype_digit((string) $value)) {
+        if (!\is_int($value) && !ctype_digit((string) $value)) {
             return;
         }
 
@@ -41,4 +40,3 @@ final class SupportedInsuredAmountValidator extends ConstraintValidator
         }
     }
 }
-

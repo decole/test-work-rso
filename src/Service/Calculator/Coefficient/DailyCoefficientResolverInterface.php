@@ -15,4 +15,3 @@ interface DailyCoefficientResolverInterface
      */
     public function getSupportedAmounts(): array;
 }
-

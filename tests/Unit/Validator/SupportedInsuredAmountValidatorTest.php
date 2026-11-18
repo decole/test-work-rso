@@ -18,7 +18,7 @@ final class SupportedInsuredAmountValidatorTest extends TestCase
 {
     private function createValidator(DailyCoefficientResolverInterface $resolver): ValidatorInterface
     {
-        $factory = new class($resolver) implements ConstraintValidatorFactoryInterface {
+        $factory = new class ($resolver) implements ConstraintValidatorFactoryInterface {
             public function __construct(private readonly DailyCoefficientResolverInterface $resolver) {}
 
             public function getInstance(Constraint $constraint): ConstraintValidatorInterface
@@ -28,7 +28,10 @@ final class SupportedInsuredAmountValidatorTest extends TestCase
                 }
 
                 $class = $constraint->validatedBy();
-                return new $class();
+                /** @var ConstraintValidatorInterface $validator */
+                $validator = new $class();
+
+                return $validator;
             }
         };
 
@@ -58,6 +61,8 @@ final class SupportedInsuredAmountValidatorTest extends TestCase
         $violations = $validator->validate(10000, new SupportedInsuredAmount());
 
         self::assertCount(1, $violations);
-        self::assertSame('Недопустимая страховая сумма. Доступны: 30000, 50000.', $violations[0]->getMessage());
+        $violation = $violations[0] ?? null;
+        self::assertNotNull($violation);
+        self::assertSame('Недопустимая страховая сумма. Доступны: 30000, 50000.', $violation->getMessage());
     }
 }

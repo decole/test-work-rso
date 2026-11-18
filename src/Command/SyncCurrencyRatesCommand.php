@@ -14,11 +14,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:currency:sync',
-    description: 'Синхронизирует и прогревает кэш актуальных курсов валют ЦБ РФ на сегодня'
+    description: 'Синхронизирует и прогревает кэш актуальных курсов валют ЦБ РФ на сегодня',
 )]
 final class SyncCurrencyRatesCommand extends Command
 {
-    public function __construct(private readonly CurrencyRateProviderInterface $rateProvider) {
+    public function __construct(
+        private readonly CurrencyRateProviderInterface $rateProvider,
+    ) {
         parent::__construct();
     }
 
@@ -27,7 +29,7 @@ final class SyncCurrencyRatesCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $today = new \DateTimeImmutable();
 
-        $io->title(sprintf('Синхронизация курсов валют ЦБ РФ на %s', $today->format('Y-m-d')));
+        $io->title(\sprintf('Синхронизация курсов валют ЦБ РФ на %s', $today->format('Y-m-d')));
 
         $tableRows = [];
         $hasErrors = false;
@@ -38,7 +40,7 @@ final class SyncCurrencyRatesCommand extends Command
 
                 $tableRows[] = [
                     $currency->value,
-                    sprintf('%.4f RUB', $rate),
+                    \sprintf('%.4f RUB', $rate),
                     'Успешно (в кэше)',
                 ];
             } catch (\Throwable $e) {
@@ -47,7 +49,7 @@ final class SyncCurrencyRatesCommand extends Command
                 $tableRows[] = [
                     $currency->value,
                     '-',
-                    sprintf('Ошибка: %s', $e->getMessage()),
+                    \sprintf('Ошибка: %s', $e->getMessage()),
                 ];
             }
         }

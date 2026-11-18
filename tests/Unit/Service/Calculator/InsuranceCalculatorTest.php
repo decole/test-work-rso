@@ -94,7 +94,7 @@ final class InsuranceCalculatorTest extends TestCase
         $calculator = new InsuranceCalculator(
             $this->coefficientResolver,
             $mockRateProvider,
-            [$sportModifier]
+            [$sportModifier],
         );
 
         $period = TripPeriod::fromStrings('2025-10-01', '2025-10-03'); // 3 days

@@ -16,4 +16,3 @@ class SupportedInsuredAmount extends Constraint
         return SupportedInsuredAmountValidator::class;
     }
 }
-

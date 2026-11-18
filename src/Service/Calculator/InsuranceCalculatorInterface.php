@@ -11,4 +11,3 @@ interface InsuranceCalculatorInterface
 {
     public function calculate(CalculationContext $context): CalculationResult;
 }
-
