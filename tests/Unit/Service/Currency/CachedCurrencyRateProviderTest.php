@@ -58,7 +58,7 @@ final class CachedCurrencyRateProviderTest extends TestCase
 
         // Second call (different currency or date): immediately blocked by circuit breaker without calling inner
         $this->expectException(CurrencyRateUnavailableException::class);
-        $this->expectExceptionMessage('Сервис получения курсов валют ЦБ РФ временно недоступен.');
+        $this->expectExceptionMessageIsOrContains('Сервис получения курсов валют ЦБ РФ временно недоступен.');
 
         $cachedProvider->getRate(CurrencyEnum::EUR, $date);
     }

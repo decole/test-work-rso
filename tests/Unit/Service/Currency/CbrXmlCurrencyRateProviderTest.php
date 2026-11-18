@@ -92,7 +92,7 @@ XML;
         $provider = new CbrXmlCurrencyRateProvider($mockClient);
 
         $this->expectException(CurrencyRateUnavailableException::class);
-        $this->expectExceptionMessage('Курс для валюты USD временно недоступен.');
+        $this->expectExceptionMessageIsOrContains('Курс для валюты USD временно недоступен.');
 
         $provider->getRate(CurrencyEnum::USD, new \DateTimeImmutable('2026-11-18'));
     }
@@ -108,7 +108,7 @@ XML;
         $provider = new CbrXmlCurrencyRateProvider($mockClient);
 
         $this->expectException(CurrencyRateUnavailableException::class);
-        $this->expectExceptionMessage('Сервис получения курсов валют ЦБ РФ временно недоступен.');
+        $this->expectExceptionMessageIsOrContains('Сервис получения курсов валют ЦБ РФ временно недоступен.');
 
         $provider->getRate(CurrencyEnum::EUR, new \DateTimeImmutable('2026-11-18'));
     }
@@ -123,7 +123,7 @@ XML;
         $provider = new CbrXmlCurrencyRateProvider($mockClient);
 
         $this->expectException(CurrencyRateUnavailableException::class);
-        $this->expectExceptionMessage('Сервис получения курсов валют ЦБ РФ временно недоступен.');
+        $this->expectExceptionMessageIsOrContains('Сервис получения курсов валют ЦБ РФ временно недоступен.');
 
         $provider->getRate(CurrencyEnum::EUR, new \DateTimeImmutable('2026-11-18'));
     }

@@ -37,7 +37,7 @@ final class TripPeriodTest extends TestCase
     public function testThrowsExceptionWhenStartDateIsAfterEndDate(): void
     {
         $this->expectException(InvalidDateRangeException::class);
-        $this->expectExceptionMessage('Дата начала поездки (2025-10-05) не может быть позже даты окончания (2025-10-01)');
+        $this->expectExceptionMessageIsOrContains('Дата начала поездки (2025-10-05) не может быть позже даты окончания (2025-10-01)');
 
         TripPeriod::fromStrings('2025-10-05', '2025-10-01');
     }
@@ -45,7 +45,7 @@ final class TripPeriodTest extends TestCase
     public function testThrowsExceptionWhenDateFormatIsInvalid(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Некорректный формат даты');
+        $this->expectExceptionMessageIsOrContains('Некорректный формат даты');
 
         TripPeriod::fromStrings('invalid-date', '2025-10-03');
     }
