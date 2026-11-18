@@ -54,6 +54,7 @@ final readonly class ExceptionListener
             }
 
             $response = (new JsonResponse())
+                ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                 ->setData([
                     'type' => 'ERROR',
                     'data' => $errorList,
@@ -80,7 +81,8 @@ final readonly class ExceptionListener
                 ];
             }
 
-            $response = new JsonResponse()
+            $response = (new JsonResponse())
+                ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                 ->setData([
                     'type' => 'ERROR',
                     'data' => $errorList,
@@ -133,6 +135,7 @@ final readonly class ExceptionListener
         }
 
         $response = (new JsonResponse())
+            ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ->setData([
                 'type' => 'ERROR',
                 'data' => $data,
