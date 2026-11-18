@@ -10,7 +10,7 @@ use App\Exception\CurrencyRateUnavailableException;
 interface CurrencyRateProviderInterface
 {
     /**
-     * Получить курс валюты по отношению к рублю (RUB) на указанную дату.
+     * Retrieve the exchange rate of the given currency against the Russian Ruble (RUB) for the specified date.
      *
      * @throws CurrencyRateUnavailableException
      */

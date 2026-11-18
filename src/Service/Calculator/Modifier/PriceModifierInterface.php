@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 interface PriceModifierInterface
 {
     /**
-     * Модифицировать стоимость в валюте с учетом контекста расчета.
+     * Modify the price in currency based on calculation context.
      *
      * @param numeric-string $currentPriceInCurrency
      * @return numeric-string

@@ -204,7 +204,7 @@ final class InsuranceCalculateControllerTest extends WebTestCase
             ], JSON_THROW_ON_ERROR)
         );
 
-        // Verification of requirement: "В случае ошибки при получении курса валют возвращать 5xx ошибку"
+        // Verification of requirement: return 5xx HTTP response on currency rate fetch failure
         self::assertResponseStatusCodeSame(Response::HTTP_SERVICE_UNAVAILABLE); // 503
 
         $data = json_decode((string) $client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
